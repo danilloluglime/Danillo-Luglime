@@ -63,11 +63,9 @@
         font-family: 'Inter', sans-serif;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
-        /* Evita o comportamento de "pull-to-refresh" nativo que quebra a sensação de app */
         overscroll-behavior-y: none;
       }
       
-      /* Estilo Ultra Glass Otimizado */
       .glass {
         background: rgba(15, 23, 42, 0.6);
         backdrop-filter: blur(12px);
@@ -98,7 +96,6 @@
         border-right: 1px solid rgba(255, 255, 255, 0.05);
       }
 
-      /* Scrollbar Futurista */
       ::-webkit-scrollbar {
         width: 4px;
         height: 4px;
@@ -120,14 +117,12 @@
         will-change: transform;
       }
       
-      /* Hide scrollbar for Chrome, Safari and Opera */
       .scrollbar-hide::-webkit-scrollbar {
           display: none;
       }
-      /* Hide scrollbar for IE, Edge and Firefox */
       .scrollbar-hide {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
       }
     </style>
   <script type="importmap">
@@ -135,7 +130,7 @@
   "imports": {
     "react": "https://aistudiocdn.com/react@^19.2.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^6.28.0",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
     "react/": "https://aistudiocdn.com/react@^19.2.1/",

@@ -39,8 +39,12 @@ const Onboarding = () => {
           alert("Por favor, digite seu nome.");
           return;
       }
+      // Ordem importante: Aceita termos, salva nome, finaliza.
       acceptTerms();
-      completeOnboarding(name);
+      // Pequeno delay para animação/UX antes de desmontar o componente
+      setTimeout(() => {
+          completeOnboarding(name);
+      }, 300);
     }
   };
 

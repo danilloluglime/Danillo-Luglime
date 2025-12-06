@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode, useCa
 import { AppState, Task, Goal, JournalEntry, Plan, ChatMessage, Report, Notification, UserProfile, Integration, Memory, SmartDevice, SmartHub, Transaction, Habit, HealthMetric } from '../types';
 
 // --- PROTEÇÃO CONTRA CÓPIA E CLONAGEM ---
-// Identificador único da build para rastreamento de clonagem
 const APP_SIGNATURE = "ULTRA_IA_SECURE_BUILD_V4.2_SALES_ENGINE";
 
 interface AppContextType extends AppState {
@@ -91,10 +90,28 @@ export const AppProvider = ({ children }: { children?: ReactNode }) => {
     if (saved) {
         try {
             const parsed = JSON.parse(saved);
-            if (parsed.user && (parsed.user.plan === 'lifetime' || !['free', 'pro'].includes(parsed.user.plan))) {
-                parsed.user.plan = 'pro'; 
-            }
-            return { ...defaultState, ...parsed };
+            // Critical fix: Ensure all arrays are initialized even if saved state has them as undefined
+            // This prevents the "white screen" crash when .filter or .map is called on undefined
+            return {
+                ...defaultState,
+                ...parsed,
+                user: { ...defaultState.user, ...parsed.user },
+                userProfile: { ...defaultState.userProfile, ...parsed.userProfile },
+                tasks: parsed.tasks || [],
+                goals: parsed.goals || [],
+                journal: parsed.journal || [],
+                plans: parsed.plans || [],
+                reports: parsed.reports || [],
+                notifications: parsed.notifications || [],
+                chatHistory: parsed.chatHistory || [],
+                integrations: parsed.integrations || defaultState.integrations,
+                memories: parsed.memories || [],
+                smartDevices: parsed.smartDevices || [],
+                smartHubs: parsed.smartHubs || defaultState.smartHubs,
+                transactions: parsed.transactions || [],
+                habits: parsed.habits || [],
+                healthMetrics: parsed.healthMetrics || []
+            };
         } catch (e) {
             console.error("Erro ao carregar estado", e);
             return defaultState;
